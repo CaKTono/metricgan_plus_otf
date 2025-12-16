@@ -2,7 +2,7 @@
 
 A GPU-accelerated implementation of MetricGAN+ for audio enhancement with on-the-fly audio degradation.
 
-Based on the paper: **"MetricGAN+: An Improved Version of MetricGAN for Speech Enhancement"** (Interspeech 2021) by Szu-Wei Fu et al.
+Based on the paper: **["MetricGAN+: An Improved Version of MetricGAN for Speech Enhancement"](https://arxiv.org/abs/2104.03538)** (Interspeech 2021) by Szu-Wei Fu et al.
 
 ## Supported Audio Types
 
