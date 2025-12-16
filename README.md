@@ -1,15 +1,21 @@
 # MetricGAN+ On-The-Fly (GPU-Accelerated)
 
-A GPU-accelerated implementation of MetricGAN+ for speech/singing voice enhancement with on-the-fly audio degradation.
+A GPU-accelerated implementation of MetricGAN+ for audio enhancement with on-the-fly audio degradation.
 
 Based on the paper: **"MetricGAN+: An Improved Version of MetricGAN for Speech Enhancement"** (Interspeech 2021) by Szu-Wei Fu et al.
 
+## Supported Audio Types
+
+- **Speech Enhancement**: Standard datasets like VoiceBank-DEMAND, DNS Challenge, etc.
+- **Singing Voice Enhancement**: Singing datasets like OpenCpop, ACESinger, OpenSinger, etc.
+- **General Audio**: Any mono audio at 16kHz sample rate
+
 ## Features
 
-- **GPU-Accelerated Degradation**: 15-20x faster than CPU-based processing
+- **GPU-Accelerated Degradation**: Faster than CPU-based processing
 - **On-The-Fly Augmentation**: Audio degradation applied during training, not pre-computed
 - **Multiple Degradation Effects**: Noise, reverb, clipping, bandwidth limitation, EQ, chorus, distortion, bitcrush, packet loss
-- **Memory Caching**: Pre-loaded noise/RIR pools and LRU cache for speech files
+- **Memory Caching**: Pre-loaded noise/RIR pools and LRU cache for audio files
 - **Hybrid Mode**: Automatic CPU fallback if GPU processing fails
 - **Multi-GPU Support**: DataParallel for distributed training
 
@@ -205,23 +211,6 @@ degradation_config = {
     "pl_max_ratio": 0.1,
 }
 ```
-
-## Performance
-
-### GPU vs CPU Degradation
-
-| Metric | CPU Pipeline | GPU Pipeline |
-|--------|--------------|--------------|
-| Per-sample degradation | 200-700ms | ~6ms |
-| Throughput | ~12 samples/s | ~200 samples/s |
-| Training overhead (750 epochs) | 42-146 hours | 2-4 hours |
-| GPU utilization | Low | High |
-
-### Memory Usage
-
-- **Noise Pool**: ~500MB for 1000 files
-- **RIR Pool**: ~200MB for 500 files
-- **Speech Cache**: Configurable (default 10000 files)
 
 ## Project Structure
 
