@@ -1,0 +1,97 @@
+# MetricGAN+ On-The-Fly Default Configuration
+
+# Experiment settings
+experiment:
+  name: "metricgan_otf"
+  output_path: "./results"
+  seed: 1
+
+# Model settings
+model:
+  causal: false
+
+# Training settings
+training:
+  epochs: 750
+  batch_size: 128
+  learning_rate: 0.0005
+  num_workers: 12
+  target_metric: "pesq"  # pesq, csig, cbak, covl
+  eval_per_epoch: 1
+  skip_val_epoch: 100
+  num_of_sampling: 1280
+  num_of_val_sample: 6903
+  hist_portion: 0.2
+
+# GPU degradation settings
+gpu_degradation:
+  enabled: true
+  fallback_cpu: false
+  cache_speech: true
+  max_cache_size: 10000
+  preload_noise: true
+  preload_rir: true
+  max_noise_pool: 1000
+  max_rir_pool: 500
+
+# Audio settings
+audio:
+  sample_rate: 16000
+  seq_len: 131072  # 512 * 256
+
+# Degradation configuration
+degradation:
+  # Noise addition
+  p_noise: 0.9
+  snr_min: -5
+  snr_max: 20
+
+  # Reverberation
+  p_reverb: 0.25
+
+  # Clipping
+  p_clipping: 0.25
+  clipping_min_db: -20
+  clipping_max_db: 0
+
+  # Bandwidth limitation
+  p_bandwidth_limitation: 0.5
+  bandwidth_limitation_rates: [4000, 8000, 16000, 22050, 32000]
+  bandwidth_limitation_methods: ["kaiser_best", "kaiser_fast", "scipy", "polyphase"]
+
+  # Bitcrush
+  p_bitcrush: 0.0
+  bitcrush_min_bits: 3
+  bitcrush_max_bits: 8
+
+  # Chorus
+  p_chorus: 0.0
+  chorus_rate_min: 0.1
+  chorus_rate_max: 3.0
+  chorus_depth_min: 0.0
+  chorus_depth_max: 1.0
+  chorus_delay_min: 1
+  chorus_delay_max: 30
+  chorus_feedback_min: -0.5
+  chorus_feedback_max: 0.5
+  chorus_mix_min: 0.4
+  chorus_mix_max: 0.6
+
+  # Distortion
+  p_distortion: 0.0
+  distortion_min_db: 5
+  distortion_max_db: 20
+
+  # EQ
+  p_eq: 0.0
+  eq_min_times: 1
+  eq_max_times: 3
+  eq_min_length: 0.5
+  eq_max_length: 1.0
+
+  # Packet loss
+  p_pl: 0.0
+  pl_min_ratio: 0.05
+  pl_max_ratio: 0.1
+  pl_min_length: 0.05
+  pl_max_length: 0.1

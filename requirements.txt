@@ -1,0 +1,9 @@
+tqdm
+joblib
+numpy
+scipy
+pesq
+soundfile
+librosa
+torchaudio>=0.7.2
+pedalboard
